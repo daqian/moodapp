@@ -1,0 +1,20 @@
+
+.tabBar {
+    position: fixed;
+    transform: translateZ(0);
+    bottom: 0;
+    color: #8F8C90;
+    font-size: .7rem;
+    height: 3.2rem;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    -moz-box-shadow: 0px 0px 1rem #DEDAE1;
+    -webkit-box-shadow: 0px 0px 1rem #DEDAE1;
+    -o-box-shadow: 0px 0px 1rem #DEDAE1;
+    -ms-box-shadow: 0px 0px 1rem #DEDAE1;
+    box-shadow: 0px 0px 1rem #DEDAE1;
+    margin-top: 1rem;
+}

@@ -1,0 +1,21 @@
+.wrapper {
+    background: #FFFEFF;
+    width: 100%;
+    height: 100%;
+}
+.labelGrid {
+    display: grid;
+    width: 94%;
+    padding: .5rem 3%;
+    .gridItem {
+        text-align: center;
+        line-height: 2rem;
+        font-size: .8rem;
+        border-radius: 1rem;
+        margin: .2rem;
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}

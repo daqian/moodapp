@@ -1,0 +1,43 @@
+.wrapper {
+    margin-top: 1.5rem;
+}
+.nowTime {
+    color: #8E8989;
+    font-size: .7rem;
+    margin-left: .5rem;
+}
+.messageWrapper {
+    display: block;
+    overflow: hidden;
+}
+.transitionMessageWrapper {
+    composes: messageWrapper;
+    transition-duration: 2s;
+    transition-timing-function: ease-in-out;
+}
+.message {
+    font-size: .9rem;
+    display: inline-block;
+    border-top-left-radius: .9rem;
+    border-top-right-radius: .9rem;
+    padding: .5rem 1rem;
+    margin: .5rem;
+}
+.messageLeft {
+    composes: message;
+    background-color: #fff;
+    color: #1A181A;
+    border-bottom-right-radius: .9rem;
+}
+.messageRight {
+    composes: message;
+    background-color: #FDA86C;
+    color: #fff;
+    border-bottom-left-radius: .9rem;
+    float: right;
+}
+.menuItem {
+    height: 3.2rem;
+    line-height: 3.2rem;
+    cursor: pointer;
+}

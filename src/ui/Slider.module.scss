@@ -1,0 +1,22 @@
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .rail{
+        position: absolute;
+        left: 50%;
+        width: 0;
+        border-left: dashed .1rem #fff;
+    }
+    .slider{
+        position: absolute;
+        left: 50%;
+        padding: .2rem;
+        text-align: center;
+        background-color: #fff;
+        color: #FDA86C;
+        border-radius: 1rem;
+        font-size: .8rem;
+    }
+}
