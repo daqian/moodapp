@@ -1,8 +1,13 @@
 
 .wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    .percentTip{
+        color: #fff;
+        font-size: 2rem;
+        position: absolute;
+        right: 0;
+        width: 45%;
+        text-align: center;
+    }
     .rail{
         position: absolute;
         left: 50%;
@@ -19,4 +24,13 @@
         border-radius: 1rem;
         font-size: .8rem;
     }
+}
+.levelList {
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+}
+.levelItem {
+    composes: levelTips from '../common/css/common.css';
+    opacity: .5;
 }

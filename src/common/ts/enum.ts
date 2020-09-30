@@ -13,3 +13,10 @@ export enum MoodColor {
     Purple = '#B94683',
     Blue = '#4D5BB8'
 }
+export enum SliderLevel {
+    Extremely = 'Extremely',
+    Very = 'Very',
+    Fairly = 'Fairly',
+    ALittle = 'A little',
+    Slightly = 'Slightly'
+}

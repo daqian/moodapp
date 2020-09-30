@@ -7,15 +7,20 @@
     display: grid;
     width: 94%;
     padding: .5rem 3%;
-    .gridItem {
-        text-align: center;
-        line-height: 2rem;
-        font-size: .8rem;
-        border-radius: 1rem;
-        margin: .2rem;
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
-    }
+}
+.gridItem {
+    composes: transition from '../common/css/common.css';
+    text-align: center;
+    line-height: 2rem;
+    font-size: .8rem;
+    border-radius: 1rem;
+    margin: .5rem .2rem;
+    color: #fff;
+}
+.gridItemActive {
+    composes: gridItem;
+    margin: .2rem 0;
+    border-radius: 1.3rem;
+    line-height: 2.4rem;
+    font-size: 1rem;
 }

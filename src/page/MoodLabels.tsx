@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styles from './MoodLabels.module.scss';
 import PagePopup from '../ui/PagePopup';
 import moods from '../data/moods';
 import { getGridRowStart, getGridColumnStart } from '../api/gridAPI';
-import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function MoodLabels() {
+  const [ activeItemId, setActiveItemId ] = useState<number>(0);
+  let history = useHistory()
+  const onItemClick = useCallback((id: number) => {
+    setActiveItemId(id)
+    setTimeout(() => {
+      history.push(`/moodslider/${id}`)
+    }, 600)
+  }, [])
   return (
     <PagePopup>
       <div className={styles.wrapper}>
@@ -17,8 +25,9 @@ function MoodLabels() {
               let gridColumnStart = getGridColumnStart(index)
               let gridColumnEnd = gridColumnStart + 1
               return <div 
-                  key={item.id} 
-                  className={styles.gridItem} 
+                  key={item.id}
+                  onClick={() => onItemClick(item.id)} 
+                  className={item.id === activeItemId ? styles.gridItemActive : styles.gridItem} 
                   style={{ 
                     backgroundColor: item.color, 
                     gridRowStart: gridRowStart,
@@ -26,9 +35,7 @@ function MoodLabels() {
                     gridColumnStart: gridColumnStart,
                     gridColumnEnd: gridColumnEnd
                   }}>
-                  <Link to={`/moodslider/${item.id}`}>
                     {item.moodValue}
-                  </Link>
                 </div>
             })
           }

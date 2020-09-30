@@ -1,7 +1,7 @@
 const serveMessages: { [key: string]: string[] } = {
     "start": [
         "{{greetings}}, {{name}}",
-        "What's that smell?It's {{whatday}}}.",
+        "What's that smell?It's {{whatday}}.",
         "How are you doing?"
     ],
     "MoodAnalyse1": [

@@ -1,3 +1,24 @@
 .wrapper {
-  
+    width: 100%;
+	background-color: #FDA86C; /* 浏览器不支持时显示 */
+    background-image: linear-gradient(#FEA66E, #FC8167);
+    position: relative;
+    .confirmBtn {
+        position: absolute;
+        bottom: .6rem;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        border: solid 2px #fff;
+        border-radius: 1rem;
+        padding: .5rem 0;
+        background: transparent;
+        width: 94%;
+        margin: 0 3%;
+    }
+}
+.backBtn{
+    composes: levelTips from '../common/css/common.css';
+    margin-top: .7rem;
+    border-bottom: dashed 1px;
 }

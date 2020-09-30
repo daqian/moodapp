@@ -2,7 +2,7 @@
 
 import serveMessages from '../data/serveMessages';
 import userMessages from '../data/userMessages';
-import { ChatType } from '../common/ts/enum';
+import { ChatType, Greetings } from '../common/ts/enum';
 import { getSequence } from "../common/js/globalCache"
 
 /**
@@ -11,7 +11,7 @@ import { getSequence } from "../common/js/globalCache"
 export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: string }>, userName: string)
 : { messageArr: Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }>, lastMsgIndex: number} {
     let messageArr : Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }> = [];
-    let lastMsgIndex = 0;
+    let lastMsgIndex = 0
     chatArr.map((chatItem) => {
         let data = chatItem.chatType === ChatType.Serve ? serveMessages : userMessages;
         let dataValue = data[chatItem.messageKey];
@@ -20,7 +20,7 @@ export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: str
             lastMsgIndex = getSequence()
             messageValue.push({
                 index: lastMsgIndex,
-                massage: messageItem.replace(/{{name}}/g, userName)
+                massage: exchangeInfoFromMsg(messageItem, userName)
             })
         })
         messageArr.push({
@@ -29,4 +29,40 @@ export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: str
         })
     })
     return { messageArr, lastMsgIndex};
+}
+
+/**
+ * 消息格式转换
+ */
+function exchangeInfoFromMsg(msg: string, userName: string): string{
+    return msg.replace(/{{name}}/g, userName)
+    .replace(/{{greetings}}/g, getGreetings())
+    .replace(/{{whatday}}/g, getDay())
+}
+
+/**
+ * 获取当前问候语
+ */
+function getGreetings(): string {
+    let nowHour: number = new Date().getHours()
+    let greetings: string = ''
+    if (nowHour >= 6 && nowHour < 11) {
+        greetings = Greetings.Morning
+    } else if (nowHour >= 11 && nowHour < 13) {
+        greetings = Greetings.Afternoon
+    } else if (nowHour >= 13 && nowHour < 19 ) {
+        greetings = Greetings.Evening
+    } else {
+        greetings = Greetings.Night
+    }
+    return greetings
+}
+
+/**
+ * 获取当前日期（星期）
+ */
+function getDay(): string {
+    let currDay: number = new Date().getDay()
+    let weeks: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return weeks[currDay]
 }

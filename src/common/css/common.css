@@ -1,4 +1,12 @@
 .transition {
-    transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
-  }
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+}
+.levelTips {
+  color: #fff;
+  font-size: 1rem;
+  margin-left: .7rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
