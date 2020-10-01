@@ -69,7 +69,11 @@ function MessageBox() {
             <div>Health</div>
             <div>Me</div>
           </TabBar>
-        </div> : <button className='loading' onClick={addMessage}>...</button>}
+        </div> : <div className={styles.loading} onClick={addMessage}>
+          <span className={styles.loadingFirst}></span>  
+          <span className={styles.loadingSecond}></span>  
+          <span className={styles.loadingThird}></span>  
+        </div>}
       </div>
     );
   }
