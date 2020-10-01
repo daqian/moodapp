@@ -4,11 +4,13 @@ import serveMessages from '../data/serveMessages';
 import userMessages from '../data/userMessages';
 import { ChatType, Greetings } from '../common/ts/enum';
 import { getSequence } from "../common/js/globalCache"
+import { getDesByPercent } from './sliderAPI';
+import { getCurrMood } from './moodAPI';
 
 /**
  * 获取当前对话数组
  */
-export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: string }>, userName: string)
+export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: string }>, userName: string, id: number, percent: number)
 : { messageArr: Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }>, lastMsgIndex: number} {
     let messageArr : Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }> = [];
     let lastMsgIndex = 0
@@ -20,7 +22,7 @@ export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: str
             lastMsgIndex = getSequence()
             messageValue.push({
                 index: lastMsgIndex,
-                massage: exchangeInfoFromMsg(messageItem, userName)
+                massage: exchangeInfoFromMsg(messageItem, userName, id, percent)
             })
         })
         messageArr.push({
@@ -34,10 +36,14 @@ export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: str
 /**
  * 消息格式转换
  */
-function exchangeInfoFromMsg(msg: string, userName: string): string{
+function exchangeInfoFromMsg(msg: string, userName: string,id: number, percent: number): string{
+    let currMood = getCurrMood(id)
+    let moodValue = currMood !== null ? currMood.moodValue : ''
     return msg.replace(/{{name}}/g, userName)
     .replace(/{{greetings}}/g, getGreetings())
     .replace(/{{whatday}}/g, getDay())
+    .replace(/{{level}}/g, getDesByPercent(percent))
+    .replace(/{{mood}}/g, moodValue)
 }
 
 /**

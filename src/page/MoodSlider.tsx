@@ -5,6 +5,7 @@ import { MoodContext } from '../App';
 import styles from './MoodSlider.module.scss';
 import Slider from '../ui/Slider';
 import { getDesByPercent } from '../api/sliderAPI';
+import { getCurrMood } from '../api/moodAPI';
 
 function MoodSlider() {
   //浏览器可视区域页面的高度
@@ -14,7 +15,7 @@ function MoodSlider() {
     const { id } = useParams();
     const [ percent, setPercent ] = useState(50);
     const data = useState(() => {
-        const currMood = moods.filter(x => x.id == id)
+        const currMood = getCurrMood(id)
         return { currMood }
     })[0];
     const levelDescription = getDesByPercent(percent)
@@ -31,6 +32,7 @@ function MoodSlider() {
     const onDataChangeCallback = (data: { percent: number }) => {
       setPercent(data.percent)
     }
+    const moodValue = data.currMood !== null ? data.currMood.moodValue : ''
     return (
       <div className={styles.wrapper} style={{ height: winH }}>
         <button className={styles.backBtn} onClick={onBackClick}>
@@ -38,10 +40,10 @@ function MoodSlider() {
         </button>
         <Slider 
           // percent={percent} 
-          buttonText={data.currMood[0].moodValue} 
+          buttonText={moodValue} 
           onDataChangeCallback={onDataChangeCallback} />
           <button className={styles.confirmBtn} onClick={onConfirmClick}>
-              I'm feeling {levelDescription} {data.currMood[0].moodValue}
+              I'm feeling {levelDescription} {moodValue}
           </button>
       </div>
     );

@@ -15,7 +15,7 @@ function MessageBox() {
     if (moodContext.currMood.id) {
       chatArr.push({ chatType: ChatType.User, messageKey: 'answerMood'})
     }
-    let datas = getMessages(chatArr, moodContext.userInfo.userName);
+    let datas = getMessages(chatArr, moodContext.userInfo.userName, moodContext.currMood.id, moodContext.currMood.percent);
     const [ chatData, setChatData ] = useState(datas.messageArr);
     const [ lastMsgIndex, setLastMsgIndex ] = useState(datas.lastMsgIndex);
     const addMessage = useCallback(() => {
@@ -24,7 +24,7 @@ function MessageBox() {
       setLastMsgIndex(lastMsg.index)
       if (moodContext.currMood.id) {
         chatArr.push({ chatType: ChatType.Serve, messageKey: 'MoodAnalyse1' })
-        datas = getMessages(chatArr, moodContext.userInfo.userName)
+        datas = getMessages(chatArr, moodContext.userInfo.userName, moodContext.currMood.id, moodContext.currMood.percent)
         setChatData(datas.messageArr)
         console.log('setTimeout-before:' + lastMsgIndex)
         setTimeout(() => {
@@ -36,8 +36,6 @@ function MessageBox() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.nowTime}>{ moment().format('MMMM Do YYYY, HH:mm') }</div>
-        <div className={styles.nowTime}>{ moodContext.currMood.id }</div>
-        <div className={styles.nowTime}>{ moodContext.currMood.percent }</div>
         <div>
           {
             chatData.map((dataItem) => {

@@ -1,3 +1,6 @@
+/**
+ * 获取网格行初始值
+ */
 export function getGridRowStart(index : number) {
     let gridRowStart : number = 0;
     for (let i = 0; i <= index; i++) {
@@ -8,6 +11,9 @@ export function getGridRowStart(index : number) {
     return gridRowStart
 }
 
+/**
+ * 获取网格列初始值
+ */
 export function getGridColumnStart(index : number) {
     let gridColumnStart : number = 0;
     switch(index % 3) {

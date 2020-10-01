@@ -60,6 +60,8 @@ function Slider(props: {
         props.onTouchStartCallback && props.onTouchStartCallback()
     }, [])
     const onTouchMove = useCallback((event : React.TouchEvent) => {
+        event.preventDefault();
+        event.stopPropagation();
         let touchObj = event.targetTouches[0];
         let pageYDiff = touchObj.pageY - data.currPageY;
         data.currPageY = touchObj.pageY;
