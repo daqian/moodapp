@@ -1,0 +1,20 @@
+
+.loading {
+    margin-left: 1rem;
+    span {
+        width: .5rem;
+        height: .5rem;
+        border-radius: .5rem;
+        display: inline-block;
+        margin-right: .6rem;
+    }
+    .loadingFirst {
+        background: #FAC094;
+    }
+    .loadingSecond {
+        background: #FCC6A3;
+    }
+    .loadingThird {
+        background: #FDAA70;
+    }
+}

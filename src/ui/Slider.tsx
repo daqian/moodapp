@@ -60,7 +60,6 @@ function Slider(props: {
         props.onTouchStartCallback && props.onTouchStartCallback()
     }, [])
     const onTouchMove = useCallback((event : React.TouchEvent) => {
-        event.preventDefault();
         event.stopPropagation();
         let touchObj = event.targetTouches[0];
         let pageYDiff = touchObj.pageY - data.currPageY;
@@ -90,8 +89,8 @@ function Slider(props: {
     return (
         <div className={styles.wrapper}>
             <div className={styles.levelList} style={{ top: data.winH015 }}>
-                { data.sliderLevels.map((level) => {
-                    return <div className={styles.levelItem} style={{ marginBottom: data.winH013 }}>{level}</div>
+                { data.sliderLevels.map((level, index) => {
+                    return <div key={index} className={styles.levelItem} style={{ marginBottom: data.winH013 }}>{level}</div>
                 }) }
             </div>
             <div className={styles.percentTip} style={{ top: data.winH015 }}>{percent}%</div>

@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import moods from '../data/moods';
 import { MoodContext } from '../App';
 import styles from './MoodSlider.module.scss';
 import Slider from '../ui/Slider';

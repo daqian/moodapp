@@ -54,9 +54,9 @@ function getGreetings(): string {
     let greetings: string = ''
     if (nowHour >= 6 && nowHour < 11) {
         greetings = Greetings.Morning
-    } else if (nowHour >= 11 && nowHour < 13) {
+    } else if (nowHour >= 11 && nowHour < 19) {
         greetings = Greetings.Afternoon
-    } else if (nowHour >= 13 && nowHour < 19 ) {
+    } else if (nowHour >= 19 && nowHour < 21 ) {
         greetings = Greetings.Evening
     } else {
         greetings = Greetings.Night

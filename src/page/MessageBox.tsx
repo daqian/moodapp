@@ -1,8 +1,9 @@
 
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import styles from './MessageBox.module.scss';
 import Menu from '../ui/Menu';
 import TabBar from '../ui/TabBar';
+import Loading from '../ui/Loading';
 import moment from 'moment';
 import { getMessages } from '../api/chatAPI';
 import { ChatType } from '../common/ts/enum';
@@ -32,6 +33,9 @@ function MessageBox() {
           console.log('setTimeout-after:' + lastMsgIndex)
         }, 100);
       }
+    }, [])
+    const onLoadedCallback = useCallback(() => {
+      console.log('onLoadedCallback')
     }, [])
     return (
       <div className={styles.wrapper}>
@@ -69,11 +73,7 @@ function MessageBox() {
             <div>Health</div>
             <div>Me</div>
           </TabBar>
-        </div> : <div className={styles.loading} onClick={addMessage}>
-          <span className={styles.loadingFirst}></span>  
-          <span className={styles.loadingSecond}></span>  
-          <span className={styles.loadingThird}></span>  
-        </div>}
+        </div> : <Loading interval={300} maxTime={2000} onLoadedCallback={onLoadedCallback} />}
       </div>
     );
   }
