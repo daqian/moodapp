@@ -26,28 +26,28 @@ function Slider(props: {
         const winH005: number = 0.05 * winH;
         const winH0525: number = 0.525 * winH;
         let currPageY : number = 0;
-        let sliderLevels = [ SliderLevel.Extremely, SliderLevel.Very, SliderLevel.Fairly, SliderLevel.ALittle, SliderLevel.Slightly ]
+        let sliderLevels: string[] = [ SliderLevel.Extremely, SliderLevel.Very, SliderLevel.Fairly, SliderLevel.ALittle, SliderLevel.Slightly ]
         return { winW, winH, winH07, winH01, winH013, winH015, winW02, winW01, winH005, winH0525, currPageY, sliderLevels }
     })[0];
-    const highestTop = 0.8 * data.winH;
-    const lowestTop = 0.15 * data.winH;
-    const onePercent = (highestTop - lowestTop) / 100
-    let initPercent = 50;
+    const highestTop: number = 0.8 * data.winH;
+    const lowestTop: number = 0.15 * data.winH;
+    const onePercent: number = (highestTop - lowestTop) / 100
+    let initPercent: number = 50;
     if (props.percent !== undefined && props.percent !== null) {
         initPercent = props.percent;
     } else if (props.defaultPercent !== undefined && props.defaultPercent !== null) {
         initPercent = props.defaultPercent;
     }
-    let currSliderTop = highestTop - (initPercent * onePercent);
-    const [ percent, setPercent ] = useState(initPercent);
-    const [ sliderTop, setSliderTop ] = useState(currSliderTop);
+    let currSliderTop: number = highestTop - (initPercent * onePercent);
+    const [ percent, setPercent ] = useState<number>(initPercent);
+    const [ sliderTop, setSliderTop ] = useState<number>(currSliderTop);
     useEffect(() => {
         // percent属性受控
         if (props.percent !== undefined && props.percent !== null) {
             if (percent !== props.percent) {
                 setPercent(props.percent)
             }
-            let currSliderTop = highestTop - (props.percent * onePercent);
+            let currSliderTop: number = highestTop - (props.percent * onePercent);
             // 按钮位置有移动时候才修改sliderTop的值
             if (Math.abs(currSliderTop - sliderTop) > 1) {
                 setSliderTop(currSliderTop)
@@ -55,14 +55,14 @@ function Slider(props: {
         }
     }, [props.percent]);
     const onTouchStart = useCallback((event : React.TouchEvent) => {
-        let touchObj = event.targetTouches[0];
+        let touchObj: React.TouchList[0] = event.targetTouches[0];
         data.currPageY = touchObj.pageY;
         props.onTouchStartCallback && props.onTouchStartCallback()
     }, [])
     const onTouchMove = useCallback((event : React.TouchEvent) => {
         event.stopPropagation();
-        let touchObj = event.targetTouches[0];
-        let pageYDiff = touchObj.pageY - data.currPageY;
+        let touchObj: React.TouchList[0]  = event.targetTouches[0];
+        let pageYDiff: number = touchObj.pageY - data.currPageY;
         data.currPageY = touchObj.pageY;
         sliderTopHandler(pageYDiff)
         props.onTouchMoveCallback && props.onTouchMoveCallback()
@@ -74,11 +74,11 @@ function Slider(props: {
         props.onTouchCancelCallback && props.onTouchCancelCallback()
     }, [])
     const sliderTopHandler = (pageYDiff: number) => {
-        const currSliderTop = sliderTop + pageYDiff;
+        const currSliderTop: number = sliderTop + pageYDiff;
         if (currSliderTop >= lowestTop && currSliderTop <= highestTop) {
             setSliderTop(currSliderTop)
-            const currPercent = highestTop - currSliderTop
-            const percent = Math.ceil(currPercent / onePercent)
+            const currPercent: number = highestTop - currSliderTop
+            const percent: number = Math.ceil(currPercent / onePercent)
             props.onDataChangeCallback && props.onDataChangeCallback({ percent })
             // percent属性不受控
             if (props.percent === undefined || props.percent === null) {

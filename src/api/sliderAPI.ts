@@ -4,7 +4,7 @@ import { SliderLevel } from '../common/ts/enum';
  * 获取心情程度描述
  */
 export function getDesByPercent(percent : number): string {
-    let levelDescription = SliderLevel.Fairly
+    let levelDescription: string = SliderLevel.Fairly
     if (percent >= 0 && percent < 20) {
         levelDescription = SliderLevel.Slightly
     } else if (percent >=20 && percent < 40) {

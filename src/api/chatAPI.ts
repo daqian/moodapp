@@ -2,7 +2,7 @@
 
 import serveMessages from '../data/serveMessages';
 import userMessages from '../data/userMessages';
-import { ChatType, Greetings } from '../common/ts/enum';
+import { ChatType, Greetings, MoodColor } from '../common/ts/enum';
 import { getSequence } from "../common/js/globalCache"
 import { getDesByPercent } from './sliderAPI';
 import { getCurrMood } from './moodAPI';
@@ -13,7 +13,7 @@ import { getCurrMood } from './moodAPI';
 export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: string }>, userName: string, id: number, percent: number)
 : { messageArr: Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }>, lastMsgIndex: number} {
     let messageArr : Array<{ chatType: ChatType, messageValue: Array<{ index: number, massage: string }> }> = [];
-    let lastMsgIndex = 0
+    let lastMsgIndex: number = 0
     chatArr.map((chatItem) => {
         let data = chatItem.chatType === ChatType.Serve ? serveMessages : userMessages;
         let dataValue = data[chatItem.messageKey];
@@ -37,8 +37,8 @@ export function getMessages(chatArr: Array<{ chatType: ChatType, messageKey: str
  * 消息格式转换
  */
 function exchangeInfoFromMsg(msg: string, userName: string,id: number, percent: number): string{
-    let currMood = getCurrMood(id)
-    let moodValue = currMood !== null ? currMood.moodValue : ''
+    let currMood: { id: number, moodValue: string, color: MoodColor } | null = getCurrMood(id)
+    let moodValue: string = currMood !== null ? currMood.moodValue : ''
     return msg.replace(/{{name}}/g, userName)
     .replace(/{{greetings}}/g, getGreetings())
     .replace(/{{whatday}}/g, getDay())

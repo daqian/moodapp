@@ -1,6 +1,7 @@
 import { MoodColor } from "../common/ts/enum"
+import { MoodInfo } from '../common/ts/interface';
 
-const moods: Array<{ id: number, moodValue: string, color: MoodColor }> = [
+const moods: Array<MoodInfo> = [
     { id: 1, moodValue: 'Excited', color: MoodColor.Orange },
     { id: 2, moodValue: 'Loving', color: MoodColor.Orange },
     { id: 3, moodValue: 'Confident', color: MoodColor.Orange },

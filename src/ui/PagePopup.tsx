@@ -3,10 +3,10 @@ import styles from './PagePopup.module.scss';
 
 function PagePopup(props: { children: React.ReactNode}) {
   //浏览器可视区域页面的宽度
-  const winW = window.innerWidth || document.documentElement.clientWidth || window.screen.width;
+  const winW: number = window.innerWidth || document.documentElement.clientWidth || window.screen.width;
   //浏览器可视区域页面的高度
-  const winH = window.innerHeight || document.documentElement.clientHeight || window.screen.height;
-  const [ pageTop, setPageTop ] = useState(winH);
+  const winH: number = window.innerHeight || document.documentElement.clientHeight || window.screen.height;
+  const [ pageTop, setPageTop ] = useState<number>(winH);
   useEffect(() => {
     setPageTop(0);
   }, []);

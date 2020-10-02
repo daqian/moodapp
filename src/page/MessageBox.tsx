@@ -19,7 +19,7 @@ function MessageBox() {
     let datas = getMessages(chatArr, moodContext.userInfo.userName, moodContext.currMood.id, moodContext.currMood.percent);
     const [ chatData, setChatData ] = useState(datas.messageArr);
     const [ lastMsgIndex, setLastMsgIndex ] = useState(datas.lastMsgIndex);
-    const addMessage = useCallback(() => {
+    const addMessage = () => {
       let lastChatData = chatData[chatData.length -  1].messageValue
       let lastMsg = lastChatData[lastChatData.length - 1]
       setLastMsgIndex(lastMsg.index)
@@ -33,9 +33,10 @@ function MessageBox() {
           console.log('setTimeout-after:' + lastMsgIndex)
         }, 100);
       }
-    }, [])
+    }
     const onLoadedCallback = useCallback(() => {
       console.log('onLoadedCallback')
+      addMessage()
     }, [])
     return (
       <div className={styles.wrapper}>
@@ -73,7 +74,7 @@ function MessageBox() {
             <div>Health</div>
             <div>Me</div>
           </TabBar>
-        </div> : <Loading interval={300} maxTime={2000} onLoadedCallback={onLoadedCallback} />}
+        </div> : <Loading interval={300} maxTime={1200} onLoadedCallback={onLoadedCallback} />}
       </div>
     );
   }

@@ -12,7 +12,8 @@ function Loading(props: {
         styles.loadingSecond,
         styles.loadingThird
     ]);
-    const [seconds, setSeconds] = useState(0);
+    const [seconds, setSeconds] = useState<number>(0);
+    const [visible, setVisible] = useState<boolean>(true);
 
     useEffect(() => {
         let start: number = 0;
@@ -23,7 +24,7 @@ function Loading(props: {
             start = timestamp;
         }
         delta = timestamp - lastTimestamp;
-        const elapsed = timestamp - start;
+        const elapsed: number = timestamp - start;
     
         setSeconds(seconds => seconds + 1);
         if (props.maxTime) {
@@ -31,6 +32,7 @@ function Loading(props: {
                 window.requestAnimationFrame(step);
             } else {
                 props.onLoadedCallback && props.onLoadedCallback()
+                setVisible(false)
             }
         }
         if (delta > props.interval) { // Stop the animation after 2 seconds
@@ -45,10 +47,12 @@ function Loading(props: {
         window.requestAnimationFrame(step);
     }, [])
     return (
-        <div className={styles.loading}>
-            { loadingStyles.map((style, index) => {
-                return <span key={index} className={style}></span>
-            }) }
+        <div>
+            {visible ? <div className={styles.loading}>
+                { loadingStyles.map((style, index) => {
+                    return <span key={index} className={style}></span>
+                }) }
+            </div> : null}
         </div>
     );
   }
